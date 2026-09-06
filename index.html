@@ -301,6 +301,22 @@ footer{padding:22px 0;background:#5a4639;color:#f4ede6}
 .detail-copy p,.detail-note{display:none!important}
 .product-card .product-body p{display:none!important}
 @media(max-width:620px){.subcat-card{padding:18px 2px!important}.subcat-copy h4{font-size:24px!important}.subcat-card::after{font-size:8px}}
+
+
+/* Media gallery: images + optional product video */
+.gallery-slide video{width:100%;height:100%;object-fit:contain;display:block;background:#111;border:0}
+.gallery-thumb.video-thumb{position:relative;display:grid;place-items:center;background:#2f2722;color:#fff;font-size:20px}
+.gallery-thumb.video-thumb::after{content:"VIDEO";position:absolute;left:5px;right:5px;bottom:4px;font-size:6px;letter-spacing:.12em;font-weight:700;text-align:center;color:#fff}
+.gallery-thumb.video-thumb svg{width:22px;height:22px;fill:currentColor}
+
+/* MM2H detail facts */
+.mm2h-facts{display:grid;gap:0;margin:5px 0 22px;border-top:1px solid var(--line)}
+.mm2h-fact{padding:12px 0;border-bottom:1px solid var(--line)}
+.mm2h-fact span{display:block;font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--brown);font-weight:700;margin-bottom:4px}
+.mm2h-fact strong{display:block;font-size:12px;line-height:1.55;color:var(--ink);font-weight:600}
+.mm2h-disclaimer{font-size:9px!important;line-height:1.6!important;color:#94857a!important;margin:0 0 18px!important;display:block!important}
+.properties-mode .subcat-card::after{content:"View details  →"!important}
+
 </style>
 </head>
 <body>
@@ -494,12 +510,21 @@ footer{padding:22px 0;background:#5a4639;color:#f4ede6}
   Upload your product images to the /images folder using the paths below.
   Keep the -01, -02, -03 numbering to control the gallery order.
 
-  Example:
-  Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-01.png
-  Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-02.png
-  Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-03.png
+  SPEED-OPTIMISED PRODUCT MEDIA
+  -----------------------------
+  Product/gallery images below use .webp for smaller file sizes and faster loading.
+  Recommended: max 1200-1600px, WebP quality around 80-85%.
 
-  You can add or remove image paths from each product's `images: []` array below.
+  Example:
+  Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-01.webp
+  Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-02.webp
+  Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-03.webp
+
+  OPTIONAL VIDEO
+  --------------
+  Any product can include: video:"Product/.../your-video.mp4"
+  The gallery will automatically add the video as the final slide.
+  Recommended MP4 (H.264), compressed before uploading to GitHub.
 */
 const categories={
  wellness:{
@@ -510,39 +535,39 @@ const categories={
    {
     name:"Skincare",
     tag:"Amazing Secret",
-    img:"Product/Amazing secret brand skin care/Skin Care/amazing-secret-skincare-collection.png",
+    img:"Product/Amazing secret brand skin care/Skin Care/amazing-secret-skincare-collection.webp",
     desc:"3 selected skincare products",
     products:[
      {
       name:"A9 Labs Whitening Cleanser",
       tag:"Amazing Secret · Skincare",
-      img:"Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-01.png",
+      img:"Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-01.webp",
       images:[
-       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-01.png",
-       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-02.png",
-       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-03.png"
+       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-01.webp",
+       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-02.webp",
+       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Cleanser/a9-labs-whitening-cleanser-03.webp"
       ],
       desc:"A selected Amazing Secret skincare product presented by JFW Global Network for overseas buyer, distributor and export enquiries."
      },
      {
       name:"A9 Labs Whitening Facial Moisturiser Serum",
       tag:"Amazing Secret · Skincare",
-      img:"Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Facial Moisturiser Serum/a9-labs-whitening-facial-moisturiser-serum-01.png",
+      img:"Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Facial Moisturiser Serum/a9-labs-whitening-facial-moisturiser-serum-01.webp",
       images:[
-       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Facial Moisturiser Serum/a9-labs-whitening-facial-moisturiser-serum-01.png",
-       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Facial Moisturiser Serum/a9-labs-whitening-facial-moisturiser-serum-02.png",
-       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Facial Moisturiser Serum/a9-labs-whitening-facial-moisturiser-serum-03.png"
+       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Facial Moisturiser Serum/a9-labs-whitening-facial-moisturiser-serum-01.webp",
+       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Facial Moisturiser Serum/a9-labs-whitening-facial-moisturiser-serum-02.webp",
+       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Facial Moisturiser Serum/a9-labs-whitening-facial-moisturiser-serum-03.webp"
       ],
       desc:"Part of the Amazing Secret skincare range currently showcased by JFW Global Network for international market and distribution opportunities."
      },
      {
       name:"A9 Labs Whitening Hydrating Essence",
       tag:"Amazing Secret · Skincare",
-      img:"Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Hydrating Essence/a9-labs-whitening-hydrating-essence-01.png",
+      img:"Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Hydrating Essence/a9-labs-whitening-hydrating-essence-01.webp",
       images:[
-       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Hydrating Essence/a9-labs-whitening-hydrating-essence-01.png",
-       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Hydrating Essence/a9-labs-whitening-hydrating-essence-02.png",
-       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Hydrating Essence/a9-labs-whitening-hydrating-essence-03.png"
+       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Hydrating Essence/a9-labs-whitening-hydrating-essence-01.webp",
+       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Hydrating Essence/a9-labs-whitening-hydrating-essence-02.webp",
+       "Product/Amazing secret brand skin care/Skin Care/A9 Labs Whitening Hydrating Essence/a9-labs-whitening-hydrating-essence-03.webp"
       ],
       desc:"A selected hydrating skincare product from Amazing Secret for overseas product sourcing, buyer and distribution enquiries."
      }
@@ -551,27 +576,27 @@ const categories={
    {
     name:"Soap",
     tag:"Amazing Secret",
-    img:"Product/Amazing secret brand skin care/Soap/A8/a8-labs-anti-acne-soap-bar-01.png",
+    img:"Product/Amazing secret brand skin care/Soap/A8/a8-labs-anti-acne-soap-bar-01.webp",
     desc:"2 selected soap products",
     products:[
      {
       name:"A7 Labs Soap Bar",
       tag:"Amazing Secret · Soap",
-      img:"Product/Amazing secret brand skin care/Soap/A7/a7-labs-soap-bar-01.png",
+      img:"Product/Amazing secret brand skin care/Soap/A7/a7-labs-soap-bar-01.webp",
       images:[
-       "Product/Amazing secret brand skin care/Soap/A7/a7-labs-soap-bar-01.png",
-       "Product/Amazing secret brand skin care/Soap/A7/a7-labs-soap-bar-02.png"
+       "Product/Amazing secret brand skin care/Soap/A7/a7-labs-soap-bar-01.webp",
+       "Product/Amazing secret brand skin care/Soap/A7/a7-labs-soap-bar-02.webp"
       ],
       desc:"A7 Labs Soap Bar is presented by JFW Global Network for overseas buyer, distributor and export enquiries."
      },
      {
       name:"A8 Labs Anti-Acne Soap Bar",
       tag:"Amazing Secret · Soap",
-      img:"Product/Amazing secret brand skin care/Soap/A8/a8-labs-anti-acne-soap-bar-01.png",
+      img:"Product/Amazing secret brand skin care/Soap/A8/a8-labs-anti-acne-soap-bar-01.webp",
       images:[
-       "Product/Amazing secret brand skin care/Soap/A8/a8-labs-anti-acne-soap-bar-01.png",
-       "Product/Amazing secret brand skin care/Soap/A8/a8-labs-anti-acne-soap-bar-02.png",
-       "Product/Amazing secret brand skin care/Soap/A8/a8-labs-anti-acne-soap-bar-03.png"
+       "Product/Amazing secret brand skin care/Soap/A8/a8-labs-anti-acne-soap-bar-01.webp",
+       "Product/Amazing secret brand skin care/Soap/A8/a8-labs-anti-acne-soap-bar-02.webp",
+       "Product/Amazing secret brand skin care/Soap/A8/a8-labs-anti-acne-soap-bar-03.webp"
       ],
       desc:"A8 Labs Anti-Acne Soap Bar is presented by JFW Global Network for overseas buyer, distributor and export enquiries."
      }
@@ -587,20 +612,22 @@ const categories={
    {
     name:"Coffee & Beverage",
     tag:"Organic Wellness",
-    img:"Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-01.png",
+    img:"Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-01.webp",
     desc:"Selected beverage products",
     products:[
      {
       name:"Miracle Gourmet Coffee Latte",
       tag:"Organic Wellness",
-      img:"Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-01.png",
+      img:"Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-01.webp",
       images:[
-       "Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-01.png",
-       "Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-02.png",
-       "Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-03.png",
-       "Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-04.png",
-       "Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-05.png"
+       "Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-01.webp",
+       "Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-02.webp",
+       "Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-03.webp",
+       "Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-04.webp",
+       "Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-05.webp"
       ],
+      // When your compressed MP4 is uploaded, remove // from the next line:
+      // video:"Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-video.mp4",
       desc:"Miracle Gourmet Coffee Latte is currently available through JFW Global Network for overseas buyer, distribution and export enquiries."
      }
     ]
@@ -610,15 +637,73 @@ const categories={
  properties:{
   label:"Property & Lifestyle",
   title:"Properties & MM2H",
-  intro:"JFW Global Network connects overseas clients with selected Malaysia property and MM2H-related opportunities through relevant partners and enquiries.",
+  intro:"Select an MM2H category to view its key programme requirements and enquire with JFW Global Network.",
+  directDetail:true,
   groups:[
-   {name:"Malaysia My Second Home",tag:"MM2H",img:"images/mm2h/mm2h-cover.jpg",desc:"Explore the Malaysia My Second Home programme and related relocation information.",products:[
-    {name:"MM2H Overview",tag:"Malaysia My Second Home",img:"images/mm2h/mm2h-cover.jpg",images:["images/mm2h/mm2h-cover.jpg"],desc:"An introduction to Malaysia My Second Home, including programme categories, application steps and living opportunities in Malaysia. Detailed eligibility and current requirements are provided upon enquiry."},
-    {name:"MM2H Application Guidance",tag:"MM2H Enquiry",img:"images/mm2h/mm2h-cover.jpg",images:["images/mm2h/mm2h-cover.jpg"],desc:"General guidance on the MM2H application journey and supporting documentation through the relevant appointed parties."}
-   ]},
-   {name:"Property Opportunities",tag:"Malaysia Property",img:"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=82",desc:"Selected property-related opportunities for overseas clients considering Malaysia.",products:[
-    {name:"Malaysia Property Enquiry",tag:"Property",img:"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=82",images:["https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=82"],desc:"Speak with JFW Global Network about property-related opportunities connected to Malaysia and MM2H enquiries."}
-   ]}
+   {
+    name:"Platinum",
+    products:[{
+     name:"Platinum",
+     tag:"Malaysia My Second Home · MM2H",
+     img:"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=76",
+     images:["https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=76"],
+     details:[
+      ["MM2H Term","20 years"],
+      ["Fixed Deposit","USD 1 Million"],
+      ["Compulsory Property Purchase","MYR 2 Million or above"],
+      ["Minimum Stay in Malaysia","90 days per year"],
+      ["Conduct Business / Work","Permitted"]
+     ]
+    }]
+   },
+   {
+    name:"Gold",
+    products:[{
+     name:"Gold",
+     tag:"Malaysia My Second Home · MM2H",
+     img:"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=76",
+     images:["https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=76"],
+     details:[
+      ["MM2H Term","15 years"],
+      ["Fixed Deposit","USD 500K"],
+      ["Compulsory Property Purchase","MYR 1 Million or above"],
+      ["Minimum Stay in Malaysia","90 days per year"],
+      ["Conduct Business / Work","Not permitted"]
+     ]
+    }]
+   },
+   {
+    name:"Silver",
+    products:[{
+     name:"Silver",
+     tag:"Malaysia My Second Home · MM2H",
+     img:"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=76",
+     images:["https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=76"],
+     details:[
+      ["MM2H Term","5 years"],
+      ["Fixed Deposit","USD 150K"],
+      ["Compulsory Property Purchase","MYR 600K or above"],
+      ["Minimum Stay in Malaysia","90 days per year"],
+      ["Conduct Business / Work","Not permitted"]
+     ]
+    }]
+   },
+   {
+    name:"Special Economic / Financial Zone",
+    products:[{
+     name:"Special Economic / Financial Zone",
+     tag:"Malaysia My Second Home · MM2H",
+     img:"https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=76",
+     images:["https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=76"],
+     details:[
+      ["MM2H Term","10 years"],
+      ["Fixed Deposit","Age 21-49: USD 65K · Age 50+: USD 32K"],
+      ["Compulsory Property Purchase","Exclusively within the designated special economic / financial zone"],
+      ["Minimum Stay in Malaysia","90 days per year"],
+      ["Conduct Business / Work","Not permitted"]
+     ]
+    }]
+   }
   ]
  }
 };
@@ -642,29 +727,44 @@ function productCard(p,index){
   </article>`;
 }
 
-function getProductImages(p){
+function getProductMedia(p){
  const imgs=Array.isArray(p.images)&&p.images.length?p.images:[p.img];
- return imgs.filter(Boolean);
+ const media=imgs.filter(Boolean).map(src=>({type:"image",src}));
+ if(p.video)media.push({type:"video",src:p.video});
+ return media;
 }
 
-function showProductDetail(productIndex){
+function showProductDetail(productIndex,forcedGroupIndex=null){
+ if(forcedGroupIndex!==null)activeGroupIndex=forcedGroupIndex;
  const g=activeCategory.groups[activeGroupIndex];
  const p=g.products[productIndex];
- const imgs=getProductImages(p);
+ const media=getProductMedia(p);
  galleryIndex=0;
+ const facts=Array.isArray(p.details)&&p.details.length
+  ? `<div class="mm2h-facts">${p.details.map(([label,value])=>`<div class="mm2h-fact"><span>${label}</span><strong>${value}</strong></div>`).join("")}</div><p class="mm2h-disclaimer">Programme requirements may change. Please enquire for the latest applicable terms and eligibility.</p>`
+  : "";
+ const slides=media.map((item,i)=>item.type==="video"
+  ? `<div class="gallery-slide"><video src="${item.src}" controls playsinline preload="metadata" aria-label="${p.name} video"></video></div>`
+  : `<div class="gallery-slide"><img src="${item.src}" alt="${p.name} image ${i+1}" loading="${i===0?'eager':'lazy'}" decoding="async"></div>`
+ ).join("");
+ const thumbs=media.map((item,i)=>item.type==="video"
+  ? `<button class="gallery-thumb video-thumb ${i===0?'active':''}" data-index="${i}" type="button" aria-label="Play ${p.name} video"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>`
+  : `<button class="gallery-thumb ${i===0?'active':''}" data-index="${i}" type="button"><img src="${item.src}" alt="${p.name} thumbnail ${i+1}" loading="lazy" decoding="async"></button>`
+ ).join("");
  productDetail.innerHTML=`<div class="detail-layout">
    <div class="gallery">
     <div class="gallery-main" id="galleryMain">
-     <div class="gallery-track" id="galleryTrack">${imgs.map((src,i)=>`<div class="gallery-slide"><img src="${src}" alt="${p.name} image ${i+1}"></div>`).join("")}</div>
-     <button class="gallery-arrow prev" id="galleryPrev" type="button" aria-label="Previous image" ${imgs.length<2?'hidden':''}><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
-     <button class="gallery-arrow next" id="galleryNext" type="button" aria-label="Next image" ${imgs.length<2?'hidden':''}><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+     <div class="gallery-track" id="galleryTrack">${slides}</div>
+     <button class="gallery-arrow prev" id="galleryPrev" type="button" aria-label="Previous media" ${media.length<2?'hidden':''}><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+     <button class="gallery-arrow next" id="galleryNext" type="button" aria-label="Next media" ${media.length<2?'hidden':''}><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
     </div>
-    <div class="gallery-dots" id="galleryDots">${imgs.map((_,i)=>`<button class="gallery-dot ${i===0?'active':''}" data-index="${i}" aria-label="Image ${i+1}"></button>`).join("")}</div>
-    <div class="gallery-thumbs" id="galleryThumbs">${imgs.map((src,i)=>`<button class="gallery-thumb ${i===0?'active':''}" data-index="${i}" type="button"><img src="${src}" alt="${p.name} thumbnail ${i+1}"></button>`).join("")}</div>
+    <div class="gallery-dots" id="galleryDots">${media.map((_,i)=>`<button class="gallery-dot ${i===0?'active':''}" data-index="${i}" aria-label="Media ${i+1}"></button>`).join("")}</div>
+    <div class="gallery-thumbs" id="galleryThumbs">${thumbs}</div>
    </div>
    <div class="detail-copy">
-    <small>${p.tag}</small>
+    <small>${p.tag||''}</small>
     <h4>${p.name}</h4>
+    ${facts}
     <a class="cta" href="https://wa.me/60122955875?text=${encodeURIComponent('Hi JFW Global, I would like to know more about '+p.name+'.')}" target="_blank" rel="noopener">Enquire on WhatsApp <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
    </div>
   </div>`;
@@ -672,9 +772,9 @@ function showProductDetail(productIndex){
  productStage.style.display="none";
  productDetail.classList.add("show");
  backBtn.classList.add("show");
- backBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back to products';
+ backBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>'+(activeCategory.directDetail?'Back to MM2H categories':'Back to products');
  collectionNote.textContent=p.name;
- initGallery(imgs.length);
+ initGallery(media.length);
 }
 
 function initGallery(count){
@@ -684,6 +784,7 @@ function initGallery(count){
   track.style.transform=`translateX(-${galleryIndex*100}%)`;
   document.querySelectorAll('#galleryDots .gallery-dot').forEach((d,i)=>d.classList.toggle('active',i===galleryIndex));
   document.querySelectorAll('#galleryThumbs .gallery-thumb').forEach((d,i)=>d.classList.toggle('active',i===galleryIndex));
+  document.querySelectorAll('#galleryTrack video').forEach((v,i)=>{if(i!==galleryIndex)v.pause()});
  };
  const prev=document.getElementById('galleryPrev'), next=document.getElementById('galleryNext');
  if(prev)prev.onclick=()=>{galleryIndex=(galleryIndex-1+count)%count;update()};
@@ -710,7 +811,15 @@ function showGroups(){
  backBtn.classList.remove("show");
  backBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back to categories';
  collectionNote.textContent="";
- categoryStage.querySelectorAll(".subcat-card").forEach(btn=>btn.addEventListener("click",()=>showProducts(Number(btn.dataset.group))));
+ categoryStage.classList.toggle("properties-mode",!!c.directDetail);
+ categoryStage.querySelectorAll(".subcat-card").forEach(btn=>btn.addEventListener("click",()=>{
+  const groupIndex=Number(btn.dataset.group);
+  if(c.directDetail){
+   showProductDetail(0,groupIndex);
+  }else{
+   showProducts(groupIndex);
+  }
+ }));
 }
 
 function showProducts(groupIndex){
@@ -750,7 +859,7 @@ function closeModal(){
 
 document.querySelectorAll(".cat").forEach(x=>x.addEventListener("click",()=>openCategory(x.dataset.cat)));
 document.getElementById("modalClose").addEventListener("click",closeModal);
-backBtn.addEventListener("click",()=>{if(productDetail.classList.contains("show")){showProducts(activeGroupIndex)}else{showGroups()}});
+backBtn.addEventListener("click",()=>{if(productDetail.classList.contains("show")){if(activeCategory&&activeCategory.directDetail){showGroups()}else{showProducts(activeGroupIndex)}}else{showGroups()}});
 modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
 
