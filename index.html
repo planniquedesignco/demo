@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no,email=no,address=no">
 <title>JFW Global Network | Malaysia Export, Sourcing, Wellness, Food & MM2H</title>
 <meta name="description" content="JFW Global Network connects Malaysian products and opportunities with overseas markets through export support, product sourcing, global business connections, wellness, food and MM2H enquiries.">
 <meta name="keywords" content="Malaysia export services, Malaysian product exporter, product sourcing Malaysia, export company Malaysia, international trading Malaysia, Malaysian wellness products, Malaysian food export, MM2H Malaysia, Malaysia My Second Home, global business connections Malaysia">
@@ -317,6 +318,30 @@ footer{padding:22px 0;background:#5a4639;color:#f4ede6}
 .mm2h-disclaimer{font-size:9px!important;line-height:1.6!important;color:#94857a!important;margin:0 0 18px!important;display:block!important}
 .properties-mode .subcat-card::after{content:"View details  →"!important}
 
+
+
+/* 2026-09-06 latest refinements */
+.world-grid-textonly{grid-template-columns:1fr;max-width:900px;margin:0 auto}
+.world-grid-textonly .world-copy{max-width:900px}
+.world-grid-textonly .world-copy>p{max-width:760px;margin:16px 0 0}
+.world-grid-textonly .steps{margin-top:30px;background:rgba(255,255,255,.45)}
+
+/* Keep labels as plain text. Only the actual phone/email values are clickable. */
+.company-details a,.company-details a:link,.company-details a:visited{color:inherit;text-decoration:none}
+.company-details .contact-link{display:inline-block;color:var(--brown2);border-bottom:1px solid rgba(118,89,70,.28);padding-bottom:1px;transition:.2s ease}
+.company-details .contact-link:hover{border-bottom-color:var(--brown2)}
+.company-details .detail-label{text-decoration:none!important;border:0!important}
+.company-details .detail-value{text-decoration:none!important}
+
+@media(max-width:620px){
+ .world-grid-textonly{display:block}
+ .world-grid-textonly .steps{margin-top:24px}
+ .company-details{gap:12px}
+ .company-details .detail-row{display:grid;grid-template-columns:88px minmax(0,1fr);gap:10px;align-items:start}
+ .company-details .detail-label{min-width:0}
+ .company-details .detail-value{min-width:0;overflow-wrap:anywhere;word-break:normal}
+}
+
 </style>
 </head>
 <body>
@@ -434,15 +459,8 @@ footer{padding:22px 0;background:#5a4639;color:#f4ede6}
 </section>
 
 <section class="world">
- <div class="wrap world-grid">
-  <div class="world-visual reveal">
-   <img src="https://images.unsplash.com/photo-1651607627829-b1c65dc70987?auto=format&fit=crop&w=900&q=82" alt="Malaysian products">
-   <div class="stack">
-    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=700&q=82" alt="Wellness">
-    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=82" alt="Properties">
-   </div>
-  </div>
-  <div class="reveal">
+ <div class="wrap world-grid world-grid-textonly">
+  <div class="reveal world-copy">
    <div class="eyebrow">04 • Beyond Borders</div>
    <h2>Made here. Introduced further.</h2>
    <p>From first discovery to direct enquiries, JFW helps create a smoother connection between Malaysian suppliers and international buyers, partners and interested audiences.</p>
@@ -466,8 +484,8 @@ footer{padding:22px 0;background:#5a4639;color:#f4ede6}
       <div class="company-name">JFW Global Network</div>
       <div class="detail-row"><span class="detail-label">Registration</span><span class="detail-value">202603164554 (LA0090651-H)</span></div>
       <div class="detail-row"><span class="detail-label">Address</span><span class="detail-value">No. 5, Jalan SS3/14A, Taman Sentosa<br>47300 Petaling Jaya, Selangor</span></div>
-      <div class="detail-row"><span class="detail-label">Telephone</span><span class="detail-value">+60 12-295 5875</span></div>
-      <div class="detail-row"><span class="detail-label">Email</span><span class="detail-value">jeannie@jfwglobal.com</span></div>
+      <div class="detail-row"><span class="detail-label">Telephone</span><span class="detail-value"><a class="contact-link" href="tel:+60122955875">+60 12-295 5875</a></span></div>
+      <div class="detail-row"><span class="detail-label">Email</span><span class="detail-value"><a class="contact-link" href="mailto:jeannie@jfwglobal.com">jeannie@jfwglobal.com</a></span></div>
     </div>
    </div>
    <a class="cta" href="https://wa.me/60122955875?text=Hi%20JFW%20Global%2C%20I%20would%20like%20to%20enquire%20about%20your%20products%20or%20business%20opportunities." target="_blank" rel="noopener">Enquire Now <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -619,8 +637,6 @@ const categories={
       name:"Miracle Gourmet Coffee Latte",
       tag:"Organic Wellness",
       img:"Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-01.webp",
-         // Video will be FIRST when product detail opens
-  video:"Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-video.mp4",
       images:[
        "Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-01.webp",
        "Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-02.webp",
@@ -731,8 +747,11 @@ function productCard(p,index){
 
 function getProductMedia(p){
  const imgs=Array.isArray(p.images)&&p.images.length?p.images:[p.img];
- const media=imgs.filter(Boolean).map(src=>({type:"image",src}));
+ const media=[];
+ // If a product has a video, show it FIRST inside the opened gallery.
+ // The product/category cover still uses p.img, so the cover remains an image.
  if(p.video)media.push({type:"video",src:p.video});
+ media.push(...imgs.filter(Boolean).map(src=>({type:"image",src})));
  return media;
 }
 
