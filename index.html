@@ -270,6 +270,37 @@ footer{padding:22px 0;background:#5a4639;color:#f4ede6}
  .modal-card{padding:22px 16px;border-radius:22px} .modal-head h3{font-size:31px}
  .product-slide{grid-template-columns:1fr}.product-img{min-height:235px;max-height:250px}.product-body{padding:22px}.product-body h4{font-size:27px}.swipe-note{display:block}
 }
+
+/* Live product list: clean text-first rows */
+.product-grid{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.product-card{border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:18px;padding:22px 4px;border-bottom:1px solid var(--line)!important;cursor:pointer;transition:.22s ease}
+.product-card:last-child{border-bottom:0!important}
+.product-card:hover{transform:none!important;background:#f7f0e8!important;padding-left:12px;padding-right:12px}
+.product-card .product-img{display:none!important}
+.product-card .product-body{padding:0!important;min-height:0!important;display:block!important}
+.product-card .product-body small{display:none!important}
+.product-card .product-body h4{font:600 28px/1.08 "Cormorant Garamond",Georgia,serif!important;margin:0!important}
+.product-card .product-body p{display:none!important}
+.product-card .view-details{margin:0!important;white-space:nowrap;align-self:center}
+.product-card::before{counter-increment:productrow;content:counter(productrow, decimal-leading-zero);font:600 25px/1 "Cormorant Garamond",Georgia,serif;color:#b59b87}
+.product-grid{counter-reset:productrow}
+@media(max-width:620px){.product-card{grid-template-columns:42px 1fr auto;gap:10px;padding:18px 2px}.product-card .product-body h4{font-size:23px!important}.product-card .view-details span{display:none}}
+
+
+/* Live-site simplified category and product selection */
+.category-stage{display:grid;grid-template-columns:1fr;gap:0!important;margin-top:8px;border-top:1px solid var(--line)}
+.subcat-card{border:0!important;border-bottom:1px solid var(--line)!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;padding:22px 4px!important;display:grid!important;grid-template-columns:1fr auto;align-items:center;gap:16px;overflow:visible!important}
+.subcat-card:hover{transform:none!important;box-shadow:none!important;background:#f7f0e8!important;padding-left:12px!important;padding-right:12px!important}
+.subcat-image{display:none!important}
+.subcat-copy{padding:0!important}
+.subcat-copy small,.subcat-copy p{display:none!important}
+.subcat-copy h4{font:600 28px/1.08 "Cormorant Garamond",Georgia,serif!important;margin:0!important}
+.subcat-card::after{content:attr(data-count) "  →";font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--brown2);white-space:nowrap}
+.modal-head p{display:none!important}
+.collection-note{display:none!important}
+.detail-copy p,.detail-note{display:none!important}
+.product-card .product-body p{display:none!important}
+@media(max-width:620px){.subcat-card{padding:18px 2px!important}.subcat-copy h4{font-size:24px!important}.subcat-card::after{font-size:8px}}
 </style>
 </head>
 <body>
@@ -448,7 +479,7 @@ footer{padding:22px 0;background:#5a4639;color:#f4ede6}
   </div>
   <div class="modal-toolbar">
     <button class="back-btn" id="backToSubcats" type="button"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back to categories</button>
-    <div class="collection-note" id="collectionNote">Select a category to explore</div>
+    <div class="collection-note" id="collectionNote"></div>
   </div>
   <div id="categoryStage" class="category-stage"></div>
   <div id="productStage" class="product-grid" style="display:none"></div>
@@ -480,7 +511,7 @@ const categories={
     name:"Skincare",
     tag:"Amazing Secret",
     img:"Product/Amazing secret brand skin care/Skin Care/amazing-secret-skincare-collection.png",
-    desc:"Explore the current Amazing Secret skincare selection available for international product and distribution enquiries.",
+    desc:"3 selected skincare products",
     products:[
      {
       name:"A9 Labs Whitening Cleanser",
@@ -521,7 +552,7 @@ const categories={
     name:"Soap",
     tag:"Amazing Secret",
     img:"Product/Amazing secret brand skin care/Soap/A8/a8-labs-anti-acne-soap-bar-01.png",
-    desc:"Explore the current Amazing Secret soap selection available for overseas buyer, distributor and export enquiries.",
+    desc:"2 selected soap products",
     products:[
      {
       name:"A7 Labs Soap Bar",
@@ -557,7 +588,7 @@ const categories={
     name:"Coffee & Beverage",
     tag:"Organic Wellness",
     img:"Product/Organic Wellnes Miracle Gourmet Coffee Latte/miracle-gourmet-coffee-latte-01.png",
-    desc:"Explore JFW Global Network's current beverage selection for international market enquiries.",
+    desc:"Selected beverage products",
     products:[
      {
       name:"Miracle Gourmet Coffee Latte",
@@ -604,11 +635,8 @@ let galleryIndex=0;
 
 function productCard(p,index){
  return `<article class="product-card" data-product="${index}" tabindex="0" role="button" aria-label="View ${p.name}">
-   <div class="product-img"><img src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#eadfd4,#cdb39e)'"></div>
    <div class="product-body">
-    <small>${p.tag}</small>
     <h4>${p.name}</h4>
-    <p>${p.desc}</p>
     <span class="view-details">View details & gallery →</span>
    </div>
   </article>`;
@@ -637,8 +665,6 @@ function showProductDetail(productIndex){
    <div class="detail-copy">
     <small>${p.tag}</small>
     <h4>${p.name}</h4>
-    <p>${p.desc}</p>
-    <div class="detail-note">Swipe or use the gallery controls to view additional product images.</div>
     <a class="cta" href="https://wa.me/60122955875?text=${encodeURIComponent('Hi JFW Global, I would like to know more about '+p.name+'.')}" target="_blank" rel="noopener">Enquire on WhatsApp <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
    </div>
   </div>`;
@@ -675,16 +701,15 @@ function initGallery(count){
 function showGroups(){
  const c=activeCategory; if(!c)return;
  activeGroupIndex=null;
- categoryStage.innerHTML=c.groups.map((g,i)=>`<button class="subcat-card" type="button" data-group="${i}">
-   <div class="subcat-image"><img src="${g.img}" alt="${g.name}"></div>
-   <div class="subcat-copy"><small>${g.tag}</small><h4>${g.name}</h4><p>${g.desc}</p></div>
+ categoryStage.innerHTML=c.groups.map((g,i)=>`<button class="subcat-card" type="button" data-group="${i}" data-count="${g.products.length} ${g.products.length===1?'Product':'Products'}">
+   <div class="subcat-copy"><h4>${g.name}</h4></div>
   </button>`).join("");
  categoryStage.style.display="grid";
  productStage.style.display="none";
  productDetail.classList.remove("show");
  backBtn.classList.remove("show");
  backBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Back to categories';
- collectionNote.textContent="Select a category to explore";
+ collectionNote.textContent="";
  categoryStage.querySelectorAll(".subcat-card").forEach(btn=>btn.addEventListener("click",()=>showProducts(Number(btn.dataset.group))));
 }
 
