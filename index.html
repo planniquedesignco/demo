@@ -113,6 +113,18 @@ header{padding:16px 0 10px;border-bottom:1px solid rgba(80,60,45,.08);background
 .cat-action svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8}
 .cat:focus-visible{outline:2px solid #b49178;outline-offset:4px}
 
+.product-discovery{display:flex;align-items:center;gap:9px;margin:0 0 18px;color:var(--brown2);font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase}
+.product-discovery .pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--brown);box-shadow:0 0 0 0 rgba(154,122,100,.45);animation:discoverPulse 1.9s infinite}
+@keyframes discoverPulse{0%{box-shadow:0 0 0 0 rgba(154,122,100,.42)}70%{box-shadow:0 0 0 9px rgba(154,122,100,0)}100%{box-shadow:0 0 0 0 rgba(154,122,100,0)}}
+.cat{overflow:hidden}
+.cat:after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--brown);transition:width .35s ease}
+.cat:hover:after,.cat:focus-visible:after{width:100%}
+.cat-action{padding:9px 12px;border:1px solid rgba(118,89,70,.18);border-radius:999px;background:rgba(255,255,255,.5);transition:.25s ease}
+.cat:hover .cat-action{background:var(--brown2);color:#fff;border-color:var(--brown2)}
+.cat-action svg{transition:transform .25s ease}
+.cat:hover .cat-action svg{transform:translateX(3px)}
+.modal-head .eyebrow:empty{display:none}
+
 
 .export{padding:82px 0;background:#efe4d9}
 .export-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:64px;align-items:start}
@@ -261,7 +273,7 @@ footer{padding:22px 0;background:#5a4639;color:#f4ede6}
  .section-head{gap:14px;margin-bottom:22px}
  .section-head h2,.export h2,.story h2,.world h2,.contact h2{font-size:33px}
  .section-head p,.export-intro,.story-copy,.world p,.contact p{font-size:13px}
- .cat{min-height:104px;grid-template-columns:48px 1fr auto;gap:14px}.cat-index{font-size:27px}.cat-main h3{font-size:23px}.cat-main p{font-size:10.5px}.cat-action span{display:none}
+ .cat{min-height:112px;grid-template-columns:42px 1fr auto;gap:12px;padding-right:4px}.cat-index{font-size:25px}.cat-main h3{font-size:23px}.cat-main p{font-size:10.5px}.cat-action{width:38px;height:38px;padding:0;justify-content:center;background:#fff}.cat-action span{display:none}.product-discovery{font-size:9px;margin-bottom:14px}
  .export-grid{gap:26px}.story-grid{gap:24px} .story-quote{font-size:18px}
  .world-grid{gap:26px} .world-visual{min-height:300px}
  .steps{grid-template-columns:1fr} .step{border-right:0;border-bottom:1px solid var(--line)} .step:last-child{border-bottom:0}
@@ -380,39 +392,40 @@ footer{padding:22px 0;background:#5a4639;color:#f4ede6}
 <section class="categories" id="categories" aria-labelledby="sectors-title">
  <div class="wrap">
   <div class="section-head reveal">
-   <div><div class="eyebrow">01 • What We Connect</div><h2 id="sectors-title">Connecting Malaysian value with global opportunities.</h2></div>
-   <p>JFW Global Network brings selected Malaysian brands, offerings and opportunities to international buyers, partners and audiences through focused market connections.</p>
+   <div><div class="eyebrow">01 • Products & Opportunities</div><h2 id="sectors-title">Explore what JFW Global can connect you with.</h2></div>
+   <p>Choose a category below to view products, details and available opportunities.</p>
   </div>
 
+  <div class="product-discovery reveal"><span class="pulse-dot"></span><span>Select a category to explore</span></div>
   <div class="cat-grid">
-   <button class="cat reveal" data-cat="wellness" type="button">
+   <button class="cat reveal" data-cat="wellness" type="button" aria-label="View Wellness and Personal Care products">
     <div class="cat-index">01</div>
     <div class="cat-main">
       <small>Wellness & Beauty</small>
       <h3>Wellness & Personal Care</h3>
       <p>Selected Malaysian skincare and personal-care offerings prepared for overseas market enquiries.</p>
     </div>
-    <div class="cat-action"><span>Explore range</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    <div class="cat-action"><span>View products</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
    </button>
 
-   <button class="cat reveal" data-cat="food" type="button">
+   <button class="cat reveal" data-cat="food" type="button" aria-label="View Malaysian Food and Beverage products">
     <div class="cat-index">02</div>
     <div class="cat-main">
       <small>Food & Beverage</small>
       <h3>Malaysian Food & Beverage</h3>
       <p>Malaysian beverage and food selections introduced to international buyers and distribution partners.</p>
     </div>
-    <div class="cat-action"><span>Explore range</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    <div class="cat-action"><span>View products</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
    </button>
 
-   <button class="cat reveal" data-cat="properties" type="button">
+   <button class="cat reveal" data-cat="properties" type="button" aria-label="View Properties and MM2H categories">
     <div class="cat-index">03</div>
     <div class="cat-main">
       <small>Property & Lifestyle</small>
       <h3>Properties & MM2H</h3>
       <p>Property and Malaysia My Second Home opportunities for overseas clients considering Malaysia.</p>
     </div>
-    <div class="cat-action"><span>Explore opportunities</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+    <div class="cat-action"><span>View MM2H</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
    </button>
   </div>
  </div>
@@ -870,7 +883,7 @@ function showProducts(groupIndex){
 function openCategory(key){
  const c=categories[key]; if(!c)return;
  activeCategory=c;
- document.getElementById("modalEyebrow").textContent=c.label;
+ document.getElementById("modalEyebrow").textContent="";
  document.getElementById("modalTitle").textContent=c.title;
  document.getElementById("modalIntro").textContent=c.intro;
  showGroups();
